@@ -86,21 +86,9 @@ type
       
       SetBrushColor(clWhite);
       FillRectangle(rect.position.x, rect.position.y, dpt.x, dpt.y);
-      SetPenColor(clDimGray);
-      Line(rect.position.x, rect.position.y, dpt.x, rect.position.y);
-      Line(rect.position.x, rect.position.y, rect.position.x, dpt.y);
-      SetPenColor(clBlack);
-      Line(rect.position.x + 1, rect.position.y + 1, dpt.x, rect.position.y + 1);
-      Line(rect.position.x + 1, rect.position.y + 1, rect.position.x + 1, dpt.y);
-      SetPenColor(clWhite);
-      Line(rect.position.x + rect.size.width, rect.position.y, dpt.x, dpt.y);
-      Line(rect.position.x, dpt.y, dpt.x, dpt.y);
-      SetPenColor(clSilver);
-      Line(dpt.x - 1, rect.position.y + 1, dpt.x - 1, dpt.y - 1);
-      Line(rect.position.x + 1, dpt.y - 1, dpt.x - 1, dpt.y - 1);
       
       TextOut(rect.position.x + 3, 
-              rect.position.y + Round((rect.size.height - TextHeight(text)) / 2), 
+              rect.position.y + Round((rect.size.height - TextHeight(text))/2), 
               text);
     end;
   end;
@@ -108,26 +96,14 @@ type
   ButtonT = class(UIElementT)
   private
     isPressed: Boolean;
+    
     procedure DrawPressedButton;
     begin
       var dpt: PointT := new PointT(rect.position.x + rect.size.width,
                                     rect.position.y + rect.size.height);
       
-      SetBrushColor(clLightGray);
+      SetBrushColor(clGray);
       FillRectangle(rect.position.x, rect.position.y, dpt.x, dpt.y);
-      
-      SetPenColor(clDimGray);
-      Line(rect.position.x, rect.position.y, dpt.x, rect.position.y);
-      Line(rect.position.x, rect.position.y, rect.position.x, dpt.y);
-      SetPenColor(clBlack);
-      Line(rect.position.x + 1, rect.position.y + 1, dpt.x, rect.position.y + 1);
-      Line(rect.position.x + 1, rect.position.y + 1, rect.position.x + 1, dpt.y);
-      SetPenColor(clWhite);
-      Line(rect.position.x + rect.size.width, rect.position.y, dpt.x, dpt.y);
-      Line(rect.position.x, dpt.y, dpt.x, dpt.y);
-      SetPenColor(clSilver);
-      Line(dpt.x - 1, rect.position.y + 1, dpt.x - 1, dpt.y - 1);
-      Line(rect.position.x + 1, dpt.y - 1, dpt.x - 1, dpt.y - 1);      
     end;
 
     procedure DrawUnpressedButton;
@@ -135,21 +111,8 @@ type
       var dpt: PointT := new PointT(rect.position.x + rect.size.width,
                                     rect.position.y + rect.size.height);      
 
-      SetBrushColor(clLightGray);
+      SetBrushColor(clWhite);
       FillRectangle(rect.position.x, rect.position.y, dpt.x, dpt.y);
-      
-      SetPenColor(clWhite);
-      Line(rect.position.x, rect.position.y, dpt.x, rect.position.y);
-      Line(rect.position.x, rect.position.y, rect.position.x, dpt.y);
-      SetPenColor(clSilver);
-      Line(rect.position.x + 1, rect.position.y + 1, dpt.x, rect.position.y + 1);
-      Line(rect.position.x + 1, rect.position.y + 1, rect.position.x + 1, dpt.y);
-      SetPenColor(clBlack);
-      Line(rect.position.x + rect.size.width, rect.position.y, dpt.x, dpt.y);
-      Line(rect.position.x, dpt.y, dpt.x, dpt.y);
-      SetPenColor(clGray);
-      Line(dpt.x - 1, rect.position.y + 1, dpt.x - 1, dpt.y - 1);
-      Line(rect.position.x + 1, dpt.y - 1, dpt.x - 1, dpt.y - 1);
     end;
     
     procedure DrawText;
@@ -203,6 +166,7 @@ type
       OnMouseUp := AfterClick;
       
       SetFontName('Arial');
+      SetFontStyle(fsBold);
       SetFontSize(12);
     end;
     
@@ -345,14 +309,14 @@ type
         
     constructor Create;
     begin
-      var buttonSize: SizeT := new SizeT(50, 30);
-      var space: SizeT := new SizeT(8, 8);
+      var buttonSize: SizeT := new SizeT(77, 52);
+      var space: SizeT := new SizeT(2, 2);
       var textFieldSize: SizeT := 
-        new SizeT(buttonSize.width*4 + space.width*3, 30);
+        new SizeT(buttonSize.width*4 + space.width*3, 50);
       
       window.IsFixedSize := true;
       window.SetSize(textFieldSize.width + space.width*2,
-                     buttonSize.height*6 + space.height*7);
+                     buttonSize.height*5 + space.height*7 + textFieldSize.height);
       window.Title := 'Калькулятор';
       
       ui := new UIT;
